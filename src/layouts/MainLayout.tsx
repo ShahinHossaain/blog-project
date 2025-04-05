@@ -7,10 +7,6 @@ const App: React.FC = () => {
       {/* NAVBAR  */}
       <Navbar />
       <Outlet />
-      {/* BREADCRUMP  */}
-      {/* INTRODUCTION  */}
-      {/* FEATURED POSTS  */}
-      {/* POST LIST  */}
     </div>
   );
 };

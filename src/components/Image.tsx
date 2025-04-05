@@ -3,6 +3,7 @@ import { IKImage } from "imagekitio-react";
 interface ImageProps {
   className?: string;
   url: string;
+  id?: string;
 }
 
 const Image: React.FC<ImageProps> = ({ className, url }) => {

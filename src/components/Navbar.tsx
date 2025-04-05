@@ -3,6 +3,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { GiCrossMark } from "react-icons/gi";
 import Image from "./Image";
 import { Link } from "react-router";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -40,11 +41,16 @@ const Navbar: React.FC = () => {
         <Link to="/">Trending</Link>
         <Link to="/">Most Popular</Link>
         <Link to="/">about</Link>
-        <Link to="/">
-          <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-            Log in 👋
-          </button>
-        </Link>
+        <SignedOut>
+          <Link to="/login">
+            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+              Log in 👋
+            </button>
+          </Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </div>
   );
