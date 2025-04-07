@@ -9,6 +9,7 @@ import Login from "./routes/LoginPage.tsx";
 import RegisterPage from "./routes/RegisterPage.tsx";
 import SinglePostPage from "./routes/SinglePostPage.tsx";
 import WritePage from "./routes/WritePage.tsx";
+import PostListPage from "./routes/PostListPage.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/write",
         element: <WritePage />,
+      },
+      {
+        path: "/posts",
+        element: <PostListPage />,
       },
     ],
   },
