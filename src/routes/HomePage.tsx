@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import MainCategories from "../components/MainCategories";
+import FeaturePosts from "../components/FeaturePosts";
+import PostList from "../components/PostList";
 
 const HomePage: React.FC = () => {
   return (
@@ -67,7 +69,12 @@ const HomePage: React.FC = () => {
         {/* CATEGORIES  */}
         <MainCategories />
         {/* FEATURED POSTS  */}
+        <FeaturePosts />
         {/* POST LIST  */}
+        <div className="">
+          <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
+          <PostList />
+        </div>
       </div>
     </div>
   );
