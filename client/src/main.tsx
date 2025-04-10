@@ -8,7 +8,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Login from "./routes/LoginPage.tsx";
 import RegisterPage from "./routes/RegisterPage.tsx";
 import SinglePostPage from "./routes/SinglePostPage.tsx";
-import WritePage from "./routes/WritePage.tsx";
+import WritePage from "./routes/WritePage.js";
 import PostListPage from "./routes/PostListPage.tsx";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/write/cat-lover",
+        path: "/:slug",
         element: <SinglePostPage />,
       },
       {
