@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/test",
+        path: "/write/cat-lover",
         element: <SinglePostPage />,
       },
       {
