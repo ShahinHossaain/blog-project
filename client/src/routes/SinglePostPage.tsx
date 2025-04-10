@@ -12,7 +12,7 @@ const fetchPost = async (slug) => {
   return res.data;
 };
 
-const SinglePostPage = () => {
+const SinglePostPage: React.FC = () => {
   const { slug } = useParams();
 
   const { isPending, error, data } = useQuery({
@@ -43,7 +43,7 @@ const SinglePostPage = () => {
         </div>
         {data.img && (
           <div className="hidden lg:block w-2/5">
-            <Image src={data.img} w="600" className="rounded-2xl" />
+            <Image url={data.img} w="600" className="rounded-2xl" />
           </div>
         )}
       </div>
@@ -143,7 +143,7 @@ const SinglePostPage = () => {
             <div className="flex items-center gap-8">
               {data.user.img && (
                 <Image
-                  src={data.user.img}
+                  url={data.user.img}
                   className="w-12 h-12 rounded-full object-cover"
                   w="48"
                   h="48"
@@ -156,10 +156,10 @@ const SinglePostPage = () => {
             </p>
             <div className="flex gap-2">
               <Link>
-                <Image src="facebook.svg" />
+                <Image url="facebook.svg" />
               </Link>
               <Link>
-                <Image src="instagram.svg" />
+                <Image url="instagram.svg" />
               </Link>
             </div>
           </div>
