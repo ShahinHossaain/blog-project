@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const PostMenuActions: React.FC = ({ post }) => {
+const PostMenuActions = ({ post }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const PostMenuActions: React.FC = ({ post }) => {
   const deleteMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
-      return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
+      return axios.delete(`${import.meta.env.VITE_API_URL}/post/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
