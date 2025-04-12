@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
       </div>
       {/* DESKTOP MENU  */}
       <div className="hidden md:flex gap-8 xl:gap-12 items-center  font-medium">
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/">Trending</Link>
         <Link to="/">Most Popular</Link>
         <Link to="/">About</Link>

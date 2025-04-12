@@ -27,7 +27,7 @@ const PostListItem: React.FC<ImageProps> = ({ post }) => {
         <div className="flex items-center gap-2 text-gray-400 text-sm">
           <span>Written by</span>
           <a href="#" className="text-blue-800">
-            {post.user.username}
+            {post?.user?.username}
           </a>
           <span>|</span>
           <a href="#" className="text-blue-800">

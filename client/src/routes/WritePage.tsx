@@ -53,7 +53,7 @@ const WritePage: React.FC = () => {
     },
     onSuccess: (res) => {
       toast.success("Post created successfully!");
-      navigate(`${res.data.slug}`);
+      navigate(`/${res.data.slug}`, { replace: true });
     },
   });
 
