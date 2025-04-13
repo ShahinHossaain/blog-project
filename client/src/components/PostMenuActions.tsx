@@ -75,7 +75,7 @@ const PostMenuActions = ({ post }) => {
     mutationFn: async () => {
       const token = await getToken();
       return axios.patch(
-        `${import.meta.env.VITE_API_URL}/posts/feature`,
+        `${import.meta.env.VITE_API_URL}/post/feature`,
         {
           postId: post._id,
         },

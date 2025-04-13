@@ -44,7 +44,7 @@ const WritePage: React.FC = () => {
   const mutation = useMutation({
     mutationFn: async (newPost: PostData) => {
       const token = await getToken();
-      console.log(newPost, token);
+      console.log(newPost, newPost);
       return axios.post(`${import.meta.env.VITE_API_URL}/post`, newPost, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,6 +75,7 @@ const WritePage: React.FC = () => {
       img: cover?.filePath || "",
       title: (formData.get("title") as string) || "",
       category: (formData.get("category") as string) || "",
+      isFeatured: false,
       desc: (formData.get("desc") as string) || "",
       content: value || "",
     };
