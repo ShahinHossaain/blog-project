@@ -6,12 +6,13 @@ const Search: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleKeyPress = (e) => {
+    console.log("haw maw khaw");
     if (e.key === "Enter") {
       const query = e.target.value;
-      if (location.pathname === "/posts") {
+      if (location.pathname === "/post") {
         setSearchParams({ ...Object.fromEntries(searchParams), search: query });
       } else {
-        navigate(`/posts?search=${query}`);
+        navigate(`/post?search=${query}`);
       }
     }
   };

@@ -28,7 +28,7 @@ const PostListItem: React.FC<ImageProps> = ({ post }) => {
           <span>Written by</span>
           <Link
             className="text-blue-800"
-            to={`/posts?author=${post.user.username}`}
+            to={`/post?author=${post.user.username}`}
           >
             {post.user.username}
           </Link>

@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
 
 const fetchPost = async (slug) => {
+  console.log("called from here");
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/post/${slug}`);
   return res.data;
 };
@@ -34,7 +35,12 @@ const SinglePostPage: React.FC = () => {
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Written by</span>
-            <Link className="text-blue-800">{data.user.username}</Link>
+            <Link
+              to={`/post?author=${data.user.username}`}
+              className="text-blue-800"
+            >
+              {data.user.username}
+            </Link>
             <span>on</span>
             <Link className="text-blue-800">{data.category}</Link>
             <span>{format(data.createdAt)}</span>
