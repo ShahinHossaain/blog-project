@@ -6,6 +6,8 @@ import Comments from "../components/Comments";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
+import { CiFacebook } from "react-icons/ci";
+import { FaInstagramSquare } from "react-icons/fa";
 
 const fetchPost = async (slug) => {
   console.log("called from here");
@@ -162,10 +164,10 @@ const SinglePostPage: React.FC = () => {
             </p>
             <div className="flex gap-2">
               <Link>
-                <Image url="facebook.svg" />
+                <CiFacebook className="text-2xl text-blue-800" />
               </Link>
               <Link>
-                <Image url="instagram.svg" />
+                <FaInstagramSquare className="text-2xl text-[#E1306C]" />
               </Link>
             </div>
           </div>

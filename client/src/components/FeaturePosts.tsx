@@ -8,7 +8,7 @@ const fetchPost = async () => {
   const res = await axios.get(
     `${import.meta.env.VITE_API_URL}/post?featured=true&limit=4&sort=newest`
   );
-  console.log("potla", res.data);
+  console.log("potla", res.data.posts[0].img);
   return res.data;
 };
 
@@ -33,7 +33,7 @@ const FeaturedPosts = () => {
         {/* image */}
         {posts[0].img && (
           <Image
-            src={posts[0].img}
+            url={posts[0].img}
             className="rounded-3xl object-cover"
             w="895"
           />
@@ -60,7 +60,7 @@ const FeaturedPosts = () => {
             {posts[1].img && (
               <div className="w-1/3 aspect-video">
                 <Image
-                  src={posts[1].img}
+                  url={posts[1].img}
                   className="rounded-3xl object-cover w-full h-full"
                   w="298"
                 />
@@ -92,7 +92,7 @@ const FeaturedPosts = () => {
             {posts[2].img && (
               <div className="w-1/3 aspect-video">
                 <Image
-                  src={posts[2].img}
+                  url={posts[2].img}
                   className="rounded-3xl object-cover w-full h-full"
                   w="298"
                 />
@@ -124,7 +124,7 @@ const FeaturedPosts = () => {
             {posts[3].img && (
               <div className="w-1/3 aspect-video">
                 <Image
-                  src={posts[3].img}
+                  url={posts[3].img}
                   className="rounded-3xl object-cover w-full h-full"
                   w="298"
                 />
