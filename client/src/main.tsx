@@ -12,6 +12,9 @@ import WritePage from "./routes/WritePage.js";
 import PostListPage from "./routes/PostListPage.tsx";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PopularPost from "./components/PopularPost.tsx";
+import About from "./components/About.tsx";
+import SavedPosts from "./routes/SavedPosts.tsx";
 
 const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -50,6 +53,22 @@ const router = createBrowserRouter([
       {
         path: "/post",
         element: <PostListPage />,
+      },
+      {
+        path: "/popular",
+        element: <PopularPost />,
+      },
+      {
+        path: "/trending",
+        element: <PopularPost />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/saved",
+        element: <SavedPosts />,
       },
     ],
   },

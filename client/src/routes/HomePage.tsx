@@ -20,11 +20,11 @@ const HomePage: React.FC = () => {
           {/* title  */}
           <div className="">
             <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Where Curiosity Meets Creativity and Knowledge Blooms
             </h1>
             <p className="mt-8 text-base md:text-xl">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Deleniti, perferendis.{" "}
+              Learn smarter, create better, and stay ahead with powerful
+              insights.
             </p>
           </div>
           {/* ANIMATED BUTTON  */}

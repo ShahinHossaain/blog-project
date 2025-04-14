@@ -7,12 +7,10 @@ import { useRef } from "react";
 const Upload: React.FC = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
   const onError = (err: AxiosError) => {
-    console.log(err);
     toast.error("Image upload failed!");
   };
 
   const onSuccess = (res: AxiosResponse) => {
-    console.log(res);
     setData(res);
   };
 
@@ -20,7 +18,6 @@ const Upload: React.FC = ({ children, type, setProgress, setData }) => {
     if (progress.total) {
       setProgress(Math.round((progress.loaded / progress.total) * 100));
     }
-    console.log(progress);
   };
 
   const authenticator = async () => {

@@ -1,10 +1,15 @@
 import { useUser, useAuth } from "@clerk/clerk-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { PostType } from "../typeScriptCode/postType.ts";
 
-const PostMenuActions = ({ post }) => {
+type PostMenuActionsProps = {
+  post: PostType;
+};
+
+const PostMenuActions: React.FC<PostMenuActionsProps> = ({ post }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const navigate = useNavigate();
@@ -26,7 +31,8 @@ const PostMenuActions = ({ post }) => {
   });
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false;
-  const isSaved = savedPosts?.data?.some((p) => p === post._id) || false;
+  const isSaved =
+    savedPosts?.data?.some((p: string) => p === post._id) || false;
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
@@ -41,8 +47,12 @@ const PostMenuActions = ({ post }) => {
       toast.success("Post deleted successfully!");
       navigate("/");
     },
-    onError: (error) => {
-      toast.error(error.response.data);
+    onError: (error: AxiosError) => {
+      if (error.response) {
+        toast.error(error.response.data as string);
+      } else {
+        toast.error("Something went wrong!");
+      }
     },
   });
 
@@ -66,8 +76,12 @@ const PostMenuActions = ({ post }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["savedPosts"] });
     },
-    onError: (error) => {
-      toast.error(error.response.data);
+    onError: (error: AxiosError) => {
+      if (error.response) {
+        toast.error(error.response.data as string);
+      } else {
+        toast.error("Something went wrong!");
+      }
     },
   });
 
@@ -89,8 +103,12 @@ const PostMenuActions = ({ post }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["post", post.slug] });
     },
-    onError: (error) => {
-      toast.error(error.response.data);
+    onError: (error: AxiosError) => {
+      if (error.response) {
+        toast.error(error.response.data as string);
+      } else {
+        toast.error("Something went wrong!");
+      }
     },
   });
 

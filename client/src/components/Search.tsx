@@ -6,7 +6,6 @@ const Search: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleKeyPress = (e) => {
-    console.log("haw maw khaw");
     if (e.key === "Enter") {
       const query = e.target.value;
       if (location.pathname === "/post") {

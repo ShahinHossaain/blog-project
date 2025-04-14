@@ -4,8 +4,15 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { CommentType } from "../typeScriptCode/commentType";
 
-const Comment: React.FC = ({ comment, postId }) => {
+type CommentProps = {
+  comment: CommentType;
+  postId: string;
+};
+
+const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
+  console.log("CP", comment, postId);
   const { user } = useUser();
   const { getToken } = useAuth();
   const role = user?.publicMetadata?.role;
@@ -38,8 +45,8 @@ const Comment: React.FC = ({ comment, postId }) => {
       <div className="flex items-center gap-4">
         {comment.user.img && (
           <Image
-            src={comment.user.img}
-            className="w-10 h-10 rounded-full object-cover"
+            url={comment.user.img}
+            className="w-10 h-10 rounded-full object-fit"
             w="40"
           />
         )}

@@ -1,10 +1,10 @@
-import { Link, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import Search from "./Search";
 
 const SideMenu: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchParams.get("sort") !== e.target.value) {
       setSearchParams({
         ...Object.fromEntries(searchParams.entries()),
@@ -12,7 +12,7 @@ const SideMenu: React.FC = () => {
       });
     }
   };
-  const handleCategoryChange = (category) => {
+  const handleCategoryChange = (category: string) => {
     if (searchParams.get("cat") !== category) {
       setSearchParams({
         ...Object.fromEntries(searchParams.entries()),

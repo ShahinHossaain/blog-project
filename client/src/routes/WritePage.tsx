@@ -44,7 +44,6 @@ const WritePage: React.FC = () => {
   const mutation = useMutation({
     mutationFn: async (newPost: PostData) => {
       const token = await getToken();
-      console.log(newPost, newPost);
       return axios.post(`${import.meta.env.VITE_API_URL}/post`, newPost, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -80,7 +79,6 @@ const WritePage: React.FC = () => {
       content: value || "",
     };
 
-    console.log(data);
     mutation.mutate(data);
   };
 
@@ -88,11 +86,14 @@ const WritePage: React.FC = () => {
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-cl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <div className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
-            Add a cover image
-          </div>
-        </Upload>
+        <div className="flex items-center gap-4">
+          <Upload type="image" setProgress={setProgress} setData={setCover}>
+            <div className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
+              Add a cover image
+            </div>
+          </Upload>
+          {"Progress: " + progress + "%"}
+        </div>
 
         <input
           className="text-4xl font-semibold bg-transparent outline-none"
@@ -145,7 +146,6 @@ const WritePage: React.FC = () => {
         >
           {mutation.isPending ? "Loading..." : "Send"}
         </button>
-        {"Progress: " + progress + "%"}
         {mutation.isError && <span>{mutation.error.message}</span>}
       </form>
     </div>
