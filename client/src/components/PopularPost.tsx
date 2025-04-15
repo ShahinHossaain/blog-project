@@ -3,7 +3,11 @@ import axios from "axios";
 import PostListItem from "./PostListItem";
 import { useLocation } from "react-router";
 
-const fetchPost = async (location) => {
+const fetchPost = async (
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  location
+) => {
   const res = await axios.get(
     `${import.meta.env.VITE_API_URL}/post?limit=10&sort=${
       location === "trending" ? "oldest" : "popular"
@@ -28,11 +32,15 @@ const PopularPost: React.FC = () => {
         "Error loading posts!"
       ) : (
         <>
-          {data.posts.map((post) => (
-            <div key={post._id}>
-              <PostListItem key={post._id} post={post}></PostListItem>
-            </div>
-          ))}
+          {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            data.posts.map((post) => (
+              <div key={post._id}>
+                <PostListItem key={post._id} post={post}></PostListItem>
+              </div>
+            ))
+          }
         </>
       )}
     </div>

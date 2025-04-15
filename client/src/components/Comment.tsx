@@ -36,7 +36,16 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
       toast.success("Comment deleted successfully");
     },
     onError: (error) => {
-      toast.error(error.response.data);
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ||
+          error.response?.data ||
+          "Something went wrong";
+
+        toast.error(String(message));
+      } else {
+        toast.error("Unexpected error occurred");
+      }
     },
   });
 

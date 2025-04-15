@@ -72,7 +72,9 @@ const FeaturedPosts = () => {
               {/* details */}
               <div className="flex items-center gap-4 text-sm lg:text-base mb-4">
                 <h1 className="font-semibold">02.</h1>
-                <Link className="text-blue-800">{posts[1].category}</Link>
+                <Link to="#" className="text-blue-800">
+                  {posts[1].category}
+                </Link>
                 <span className="text-gray-500 text-sm">
                   {format(posts[1].createdAt)}
                 </span>
@@ -138,7 +140,9 @@ const FeaturedPosts = () => {
               {/* details */}
               <div className="flex items-center gap-4 text-sm lg:text-base mb-4">
                 <h1 className="font-semibold">02.</h1>
-                <Link className="text-blue-800">{posts[3].category}</Link>
+                <Link to="#" className="text-blue-800">
+                  {posts[3].category}
+                </Link>
                 <span className="text-gray-500 text-sm">
                   {format(posts[3].createdAt)}
                 </span>

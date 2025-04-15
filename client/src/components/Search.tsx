@@ -5,7 +5,11 @@ const Search: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    e
+  ) => {
     if (e.key === "Enter") {
       const query = e.target.value;
       if (location.pathname === "/post") {

@@ -3,6 +3,7 @@ export type UserType = {
   clerkUserId: string;
   username: string;
   email: string;
+  img:string;   
   savePost: string[]; 
   createdAt: string;  
   updatedAt: string;

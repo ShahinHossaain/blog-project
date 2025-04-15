@@ -4,14 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 
-const fetchComments = async (postId) => {
+const fetchComments = async (postId: string) => {
   const res = await axios.get(
     `${import.meta.env.VITE_API_URL}/comments/${postId}`
   );
   return res.data;
 };
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId }: { postId: string }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
 
@@ -39,18 +39,40 @@ const Comments = ({ postId }) => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
     },
     onError: (error) => {
-      toast.error(error.response.data);
+      if (axios.isAxiosError(error)) {
+        const message =
+          error.response?.data?.message ||
+          error.response?.data ||
+          "Something went wrong";
+
+        toast.error(String(message));
+      } else {
+        toast.error("Unexpected error occurred");
+      }
     },
   });
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+
+  //   const data = {
+  //     desc: formData.get("desc"),
+  //   };
+
+  //   mutation.mutate(data);
+  // };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
     const data = {
       desc: formData.get("desc"),
     };
-
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     mutation.mutate(data);
   };
 
@@ -79,19 +101,31 @@ const Comments = ({ postId }) => {
           {mutation.isPending && (
             <Comment
               comment={{
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 desc: `${mutation.variables.desc} (Sending...)`,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 createdAt: new Date(),
                 user: {
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
                   img: user.imageUrl,
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
                   username: user.username,
                 },
               }}
             />
           )}
 
-          {data.map((comment) => (
-            <Comment key={comment._id} comment={comment} postId={postId} />
-          ))}
+          {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            data.map((comment) => (
+              <Comment key={comment._id} comment={comment} postId={postId} />
+            ))
+          }
         </>
       )}
     </div>

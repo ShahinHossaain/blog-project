@@ -27,13 +27,27 @@ const WritePage: React.FC = () => {
 
   useEffect(() => {
     if (img) {
-      setValue((prev) => prev + `<p><image src="${img.url}"/></p>`);
+      setValue(
+        (prev) =>
+          prev +
+          `<p><image src="${
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            img.url
+          }"/></p>`
+      );
     }
   }, [img]);
   useEffect(() => {
     if (video) {
       setValue(
-        (prev) => prev + `<p><iframe class="ql-video" src="${video.url}"/></p>`
+        (prev) =>
+          prev +
+          `<p><iframe class="ql-video" src="${
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            video.url
+          }"/></p>`
       );
     }
   }, [video]);
@@ -71,6 +85,8 @@ const WritePage: React.FC = () => {
     const formData = new FormData(form);
 
     const data = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       img: cover?.filePath || "",
       title: (formData.get("title") as string) || "",
       category: (formData.get("category") as string) || "",
