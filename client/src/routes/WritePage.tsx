@@ -2,11 +2,12 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
 import ReactQuill from "react-quill-new";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload";
 import axios from "axios";
+import Image from "../components/Image";
 
 // Define the type of your data
 interface PostData {
@@ -21,36 +22,7 @@ const WritePage: React.FC = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [value, setValue] = useState("");
   const [cover, setCover] = useState<string>("");
-  const [img, setImg] = useState("");
-  const [video, setVideo] = useState("");
   const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (img) {
-      setValue(
-        (prev) =>
-          prev +
-          `<p><image src="${
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            img.url
-          }"/></p>`
-      );
-    }
-  }, [img]);
-  useEffect(() => {
-    if (video) {
-      setValue(
-        (prev) =>
-          prev +
-          `<p><iframe class="ql-video" src="${
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            video.url
-          }"/></p>`
-      );
-    }
-  }, [video]);
 
   const navigate = useNavigate();
   const { getToken } = useAuth();
@@ -103,18 +75,37 @@ const WritePage: React.FC = () => {
       <h1 className="text-cl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
         <div className="flex items-center gap-4">
-          <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <div className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
-              Add a cover image
-            </div>
-          </Upload>
-          {"Progress: " + progress + "%"}
+          <div>
+            <Upload type="image" setProgress={setProgress} setData={setCover}>
+              <div className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
+                Add a cover image
+              </div>
+            </Upload>
+            <p
+              className={
+                progress ? "block text-sm text-gray-500 m-3" : "hidden"
+              }
+            >
+              {" "}
+              {"Progress: " + progress + "%"}
+            </p>
+          </div>
+          <div>
+            {cover && (
+              <Image
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                url={cover.name}
+                className="h-[100px] w-[100px] rounded-md"
+              />
+            )}
+          </div>
         </div>
 
         <input
-          className="text-4xl font-semibold bg-transparent outline-none"
+          className="text-4xl font-semibold outline-none p-5 rounded-xl"
           type="text"
-          placeholder="My Awesome Story"
+          placeholder="Write Title"
           name="title"
         />
         <div className="flex items-center gap-4">
@@ -140,14 +131,6 @@ const WritePage: React.FC = () => {
           placeholder="A Short Description"
         ></textarea>
         <div className="flex flex-1">
-          <div className="flex flex-col gap-2 mr-2">
-            <Upload type="image" setProgress={setProgress} setData={setImg}>
-              📸
-            </Upload>
-            <Upload type="video" setProgress={setProgress} setData={setVideo}>
-              ✂️
-            </Upload>
-          </div>
           <ReactQuill
             theme="snow"
             className="flex-1 rounded-xl bg-white shadow-md"

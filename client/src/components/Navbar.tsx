@@ -34,8 +34,8 @@ const Navbar: React.FC = () => {
         {open ? <GiCrossMark /> : <CiMenuFries />}
         {/* MOBILE LINK LIST  */}
         <div
-          className={`w-full h-screen flex flex-col items-center justify-center gap-8 font-medium text-lg absolute top-16 transition-all ease bg-white/10 backdrop-blur-md ${
-            open ? "-right-0" : "-right-[100%]"
+          className={`w-full flex flex-col pb-5 items-center justify-center gap-8 font-medium text-lg absolute top-16 transition-all ease bg-white/10 backdrop-blur-md ${
+            open ? "-right-0 block" : "-right-[100%] hidden"
           }`}
         >
           <Link to="/">Home</Link>
