@@ -1,29 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import PostListItem from "./PostListItem";
-import { useLocation } from "react-router";
+import PostListItem from "../components/PostListItem";
+import { useUser } from "@clerk/clerk-react";
 
-const fetchPost = async (
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  location
-) => {
+const fetchPost = async (username: string) => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/post?limit=10&sort=${
-      location === "trending" ? "oldest" : "popular"
-    }`
+    `${import.meta.env.VITE_API_URL}/post/?author=${username}`
   );
   return res.data;
 };
 
-const PopularPost: React.FC = () => {
-  const location = useLocation();
-  const newLocation = location.pathname.replace("/", "");
+const MyPost: React.FC = () => {
+  const { user } = useUser();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["posts", location],
-    queryFn: () => fetchPost(newLocation),
+    queryKey: ["post"],
+    queryFn: () =>
+      fetchPost(
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        user.username!
+      ),
   });
+
+  if (isPending) return "loading...";
+  if (error) return "Something went wrong!" + error.message;
+  if (!data) return "Post not found!";
+
   return (
     <div className="">
       {isPending ? (
@@ -47,4 +50,4 @@ const PopularPost: React.FC = () => {
   );
 };
 
-export default PopularPost;
+export default MyPost;

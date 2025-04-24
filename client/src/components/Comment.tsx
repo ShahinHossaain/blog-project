@@ -12,7 +12,6 @@ type CommentProps = {
 };
 
 const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
-  console.log("CP", comment, postId);
   const { user } = useUser();
   const { getToken } = useAuth();
   const role = user?.publicMetadata?.role;
@@ -50,8 +49,8 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
   });
 
   return (
-    <div className="p-4 bg-slate-50 rounded-xl mb-8">
-      <div className="flex items-center gap-4">
+    <div className="p-4 bg-slate-50 rounded-xl ">
+      <div className="flex items-center gap-4 text-sm mb-2">
         {comment.user.img && (
           <Image
             url={comment.user.img}
@@ -74,7 +73,7 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
             </span>
           )}
       </div>
-      <div className="mt-4">
+      <div className="">
         <p>{comment.desc}</p>
       </div>
     </div>

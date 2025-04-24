@@ -10,6 +10,7 @@ import {
   UserButton,
   useUser,
 } from "@clerk/clerk-react";
+import ActiveLink from "./ActiveLink";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ const Navbar: React.FC = () => {
         <span>BlogVibe </span>
       </Link>
       {/* MOBILE MENU  */}
-      <div className="md:hidden" onClick={() => setOpen((prev) => !prev)}>
+      <div className="md:hidden mr-3" onClick={() => setOpen((prev) => !prev)}>
         {/* MOBILE BUTTON  */}
         {open ? <GiCrossMark /> : <CiMenuFries />}
         {/* MOBILE LINK LIST  */}
@@ -38,25 +39,34 @@ const Navbar: React.FC = () => {
             open ? "-right-0 block" : "-right-[100%] hidden"
           }`}
         >
-          <Link to="/">Home</Link>
-          {isSignedIn && <Link to="/saved">Saved Posts</Link>}
-          <Link to="/trending">Trending</Link>
-          <Link to="/popular">Most Popular</Link>
-          <Link to="/about">About</Link>
-          <Link to="/">
-            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-              Log in 👋
-            </button>
-          </Link>
+          <ActiveLink to="/">Home</ActiveLink>
+          {isSignedIn && <ActiveLink to="/write">Create Post</ActiveLink>}
+          {isSignedIn && <ActiveLink to="/my-post">My Post</ActiveLink>}
+          {isSignedIn && <ActiveLink to="/saved">Saved Posts</ActiveLink>}
+          <ActiveLink to="/trending">Trending</ActiveLink>
+          <ActiveLink to="/popular">Most Popular</ActiveLink>
+          <ActiveLink to="/about">About</ActiveLink>
+          <SignedOut>
+            <ActiveLink to="/login">
+              <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+                Log in 👋
+              </button>
+            </ActiveLink>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
       {/* DESKTOP MENU  */}
       <div className="hidden md:flex gap-8 xl:gap-12 items-center  font-medium">
-        <Link to="/">Home</Link>
-        {isSignedIn && <Link to="/saved">Saved Posts</Link>}
-        <Link to="/trending">Trending</Link>
-        <Link to="/popular">Most Popular</Link>
-        <Link to="/about">About</Link>
+        <ActiveLink to="/">Home</ActiveLink>
+        {isSignedIn && <ActiveLink to="/write">Create Post</ActiveLink>}
+        {isSignedIn && <ActiveLink to="/my-post">My Post</ActiveLink>}
+        {isSignedIn && <ActiveLink to="/saved">Saved Posts</ActiveLink>}
+        <ActiveLink to="/trending">Trending</ActiveLink>
+        <ActiveLink to="/popular">Most Popular</ActiveLink>
+        <ActiveLink to="/about">About</ActiveLink>
         <SignedOut>
           <Link to="/login">
             <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">

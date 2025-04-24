@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PopularPost from "./components/PopularPost.tsx";
 import About from "./components/About.tsx";
 import SavedPosts from "./routes/SavedPosts.tsx";
+import MyPost from "./routes/MyPosts.tsx";
 
 const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/saved",
         element: <SavedPosts />,
+      },
+      {
+        path: "/my-post",
+        element: <MyPost />,
       },
     ],
   },

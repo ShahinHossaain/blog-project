@@ -22,7 +22,7 @@ const PostMenuActions: React.FC<PostMenuActionsProps> = ({ post }) => {
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken();
-      return axios.get(`${import.meta.env.VITE_API_URL}/users/saved2`, {
+      return axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +31,8 @@ const PostMenuActions: React.FC<PostMenuActionsProps> = ({ post }) => {
   });
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false;
-  const isSaved = savedPosts?.data?.some((p: string) => p == post._id) || 0;
+  const isSaved =
+    savedPosts?.data?.some((p: string) => p === post._id) || false;
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
@@ -150,7 +151,7 @@ const PostMenuActions: React.FC<PostMenuActionsProps> = ({ post }) => {
                 stroke="black"
                 strokeWidth="2"
                 fill={
-                  saveMutation?.isPending
+                  saveMutation.isPending
                     ? isSaved
                       ? "none"
                       : "black"
@@ -160,7 +161,7 @@ const PostMenuActions: React.FC<PostMenuActionsProps> = ({ post }) => {
                 }
               />
             </svg>
-            <span>Save this Blog</span>
+            <span>Save this Post</span>
             {saveMutation.isPending && (
               <span className="text-xs">(in progress)</span>
             )}

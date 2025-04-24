@@ -9,9 +9,9 @@ const SavedPosts: React.FC = () => {
 
   // Step 1: Get saved post IDs
   const {
-    isPending: isLoadingIds,
-    error: idsError,
-    data: savedPostIds,
+    isPending: isLoadingPosts,
+    error: postsError,
+    data: savedPostsData,
   } = useQuery({
     queryKey: ["savedPosts"],
     queryFn: async () => {
@@ -29,26 +29,26 @@ const SavedPosts: React.FC = () => {
   });
 
   // Step 2: Get full posts for each saved ID
-  const {
-    data: savedPostsData,
-    isPending: isLoadingPosts,
-    error: postsError,
-  } = useQuery({
-    queryKey: ["savedPostDetails", savedPostIds],
-    queryFn: async () => {
-      if (!savedPostIds || savedPostIds.length === 0) return [];
-      const posts = await Promise.all(
-        savedPostIds.map((postId: string) =>
-          axios
-            .get(`${import.meta.env.VITE_API_URL}/post/item/${postId}`)
-            .then((res) => res.data)
-        )
-      );
-      console.log("&&&", posts);
-      return posts;
-    },
-    enabled: !!savedPostIds,
-  });
+  // const {
+  //   data: savedPostsData,
+  //   isPending: isLoadingPosts,
+  //   error: postsError,
+  // } = useQuery({
+  //   queryKey: ["savedPostDetails", savedPostIds],
+  //   queryFn: async () => {
+  //     if (!savedPostIds || savedPostIds.length === 0) return [];
+  //     const posts = await Promise.all(
+  //       savedPostIds.map((postId: string) =>
+  //         axios
+  //           .get(`${import.meta.env.VITE_API_URL}/post/item/${postId}`)
+  //           .then((res) => res.data)
+  //       )
+  //     );
+  //     console.log("***", posts);
+  //     return posts;
+  //   },
+  //   enabled: !!savedPostIds,
+  // });
 
   // Step 3: Auth checks
   if (!isLoaded) return <div>Loading...</div>;
@@ -57,18 +57,22 @@ const SavedPosts: React.FC = () => {
   // Step 4: Render
   return (
     <div>
-      {isLoadingIds || isLoadingPosts ? (
+      {isLoadingPosts ? (
         "Loading posts..."
-      ) : idsError || postsError ? (
+      ) : postsError ? (
         "Error loading posts!"
       ) : (
-        <div className="flex flex-col gap-4">
-          {savedPostsData.length === 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-10  ">
+          {!Array.isArray(savedPostsData) || savedPostsData.length === 0 ? (
             <p>No saved posts found.</p>
           ) : (
-            savedPostsData.map((post: any) => (
-              <PostListItem key={post._id} post={post} />
-            ))
+            savedPostsData?.map(
+              (
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                post
+              ) => <PostListItem key={post._id} post={post}></PostListItem>
+            )
           )}
         </div>
       )}

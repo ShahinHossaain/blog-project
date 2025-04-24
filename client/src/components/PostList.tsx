@@ -17,8 +17,6 @@ import { useSearchParams } from "react-router";
 const fetchPosts = async (pageParam: number, searchParams: URLSearchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
-  console.log(searchParamsObj, " sata");
-
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/post`, {
     params: { page: pageParam, limit: 10, ...searchParamsObj },
   });
@@ -44,16 +42,20 @@ const PostList: React.FC = () => {
       dataLength={allPosts.length} //This is important field to render the next data
       next={fetchNextPage}
       hasMore={!!hasNextPage}
-      loader={<h4>Loading more posts...</h4>}
+      loader={<h4></h4>}
       endMessage={
         <p>
           <b>All posts loaded</b>
         </p>
       }
     >
-      {allPosts.map((post) => (
-        <PostListItem key={post._id} post={post} />
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-10  ">
+        {allPosts.length === 0 ? (
+          <p>No Blog Available</p>
+        ) : (
+          allPosts.map((post) => <PostListItem key={post._id} post={post} />)
+        )}
+      </div>
     </InfiniteScroll>
   );
 };

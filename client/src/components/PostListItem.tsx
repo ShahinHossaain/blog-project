@@ -9,24 +9,32 @@ type PostListItemProps = {
 
 const PostListItem: React.FC<PostListItemProps> = ({ post }) => {
   return (
-    <div className="flex flex-col xl:flex-row gap-8 mb-8">
-      {/* Image */}
-      {post.img && (
-        <div className="md:hidden xl:block xl:w-2/5 h-[300px] xl:h-[410px]">
-          <Image
-            url={post.img}
-            className="rounded-2xl object-fit w-full xl:w-[510px] h-full "
-            // w="735"
-          />
-        </div>
-      )}
-
-      {/* Details */}
-      <div className="flex flex-col gap-4 xl:w-2/3">
-        <Link to={`/${post.slug}`} className="text-4xl font-semibold">
-          {post.title}
+    <div className="max-w-md mx-auto bg-[#e6e6ff] border border-gray-300 rounded-md overflow-hidden shadow-md hover:shadow-xl transition duration-300 ease-in-out">
+      <div className="h-72 overflow-hidden">
+        <Image
+          url={post.img}
+          className="w-full h-full object-cover lg:transition-transform lg:duration-300 lg:hover:scale-105 rounded-lg"
+        />
+      </div>
+      <div className="p-5 text-center">
+        <Link
+          to={`/post?cat=${post.category}`}
+          className="block text-sm text-gray-600 underline cursor-pointer m-5"
+        >
+          {post.category}{" "}
         </Link>
-        <div className="flex items-center gap-2 text-gray-400 text-sm">
+        <Link
+          to={`/${post.slug}`}
+          className="block text-lg font-semibold text-gray-900 mb-2"
+        >
+          {post.title}{" "}
+        </Link>
+        <p className="mb-4">
+          {post.desc.split(" ").length > 12
+            ? post.desc.split(" ").slice(0, 12).join(" ") + "..."
+            : post.desc}
+        </p>
+        <div className="text-xs text-gray-500 flex justify-center gap-2">
           <span>Written by</span>
           <Link
             className="text-blue-800"
@@ -35,15 +43,14 @@ const PostListItem: React.FC<PostListItemProps> = ({ post }) => {
             {post.user.username}
           </Link>
           <span>on</span>
-          <Link to="#" className="text-blue-800">
-            {post.category}
-          </Link>
+
           <span>{format(post.createdAt)}</span>
         </div>
-        <p>{post.desc}</p>
-
-        <Link to={`/${post.slug}`} className="underline text-blue-800 text-sm">
-          Read More
+        <Link
+          to={`/${post.slug}`}
+          className="block my-5 underline text-blue-800 text-sm"
+        >
+          Read More{" "}
         </Link>
       </div>
     </div>

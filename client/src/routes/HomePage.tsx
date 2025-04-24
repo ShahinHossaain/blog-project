@@ -64,6 +64,11 @@ const HomePage: React.FC = () => {
               </svg>
             </button>
           </Link>
+          <Link to="/write" className="md:hidden block ">
+            <button className=" m-auto w-24 h-24 bg-gradient-to-br from-blue-700 to-indigo-800 text-white rounded-full flex items-center justify-center shadow-xl animate-pulse transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:to-indigo-700">
+              Create a Post
+            </button>
+          </Link>
         </div>
 
         {/* CATEGORIES  */}

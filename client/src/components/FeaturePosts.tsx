@@ -26,7 +26,7 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="mt-8 flex flex-col lg:flex-row gap-8">
+    <div className="hidden  mt-8 lg:flex flex-col lg:flex-row gap-8">
       {/* First */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* image */}
@@ -81,11 +81,17 @@ const FeaturedPosts = () => {
               </div>
               {/* title */}
               <Link
-                to={posts[1].slug}
+                to={`/${posts[1].slug}`}
                 className="text-base sm:text-lg md:text-2xl lg:text-xl xl:text-2xl font-medium"
               >
                 {posts[1].title}
               </Link>
+
+              <p className="my-4 w-[75%]">
+                {posts[1]?.desc.split(" ").length > 12
+                  ? posts[1]?.desc.split(" ").slice(0, 12).join(" ") + "..."
+                  : posts[1]?.desc}
+              </p>
             </div>
           </div>
         )}
@@ -115,11 +121,17 @@ const FeaturedPosts = () => {
               </div>
               {/* title */}
               <Link
-                to={posts[1].slug}
+                to={`/${posts[2].slug}`}
                 className="text-base sm:text-lg md:text-2xl lg:text-xl xl:text-2xl font-medium"
               >
                 {posts[2].title}
               </Link>
+
+              <p className="my-4 w-[75%]">
+                {posts[2]?.desc.split(" ").length > 12
+                  ? posts[2]?.desc.split(" ").slice(0, 12).join(" ") + "..."
+                  : posts[2]?.desc}
+              </p>
             </div>
           </div>
         )}
@@ -154,6 +166,11 @@ const FeaturedPosts = () => {
               >
                 {posts[3].title}
               </Link>
+              <p className="my-4 w-[75%]">
+                {posts[3]?.desc.split(" ").length > 12
+                  ? posts[3]?.desc.split(" ").slice(0, 12).join(" ") + "..."
+                  : posts[3]?.desc}
+              </p>
             </div>
           </div>
         )}
